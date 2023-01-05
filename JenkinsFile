@@ -1,0 +1,13 @@
+node {
+      def mvnHome = tool 'MVN_HOME'
+    stage('Checkout'){
+        checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sahilverma3120/Assignment6Nagarro_Backend/']]])
+    }
+     echo 'I checked stuff out'
+    
+    stage('build and Test') {
+          bat "${mvnHome}/bin/mvn clean install -f LibraryManagmentSystem/pom.xml"
+    }
+      echo 'I built and unit tested stuff'
+    
+}
